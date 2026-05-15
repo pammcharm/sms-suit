@@ -11,7 +11,6 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
 from django.http import Http404, HttpResponse, JsonResponse
 from django.db import transaction
 from django.db.models import Count, F, Sum, Q
@@ -21,6 +20,52 @@ from django.utils import timezone
 from openpyxl import load_workbook
 from openpyxl import Workbook
 import requests
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
+from pprint import pprint
+
+
+def send_brevo_email(to_email, subject, html_content, plain_content=None):
+    """
+    Send email using Brevo (Sendinblue) API instead of Django's send_mail
+    """
+    # Configure Brevo API
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key['api-key'] = settings.BREVO_API_KEY
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
+    
+    # Define email content
+    if plain_content is None:
+        # Strip HTML tags for plain text version if not provided
+        import re
+        plain_content = re.sub('<[^<]+?>', '', html_content)
+    
+    email = sib_api_v3_sdk.SendSmtpEmail(
+        to=[{"email": to_email}],
+        sender={"email": settings.DEFAULT_FROM_EMAIL.split('<')[-1].strip('>'), 
+                "name": settings.DEFAULT_FROM_EMAIL.split('<')[0].strip()},
+        subject=subject,
+        html_content=html_content,
+        text_content=plain_content
+    )
+    
+    # Send the email
+    try:
+        api_response = api_instance.send_transac_email(email)
+        pprint(api_response)
+        return True
+    except ApiException as e:
+        print(f"Exception when sending Brevo email: {e}")
+        # Fall back to Django's send_mail for critical emails if Brevo fails
+        from django.core.mail import send_mail
+        send_mail(
+            subject=subject,
+            message=plain_content,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[to_email],
+            fail_silently=False,
+        )
+        return False
 
 from .forms import CRUD_FORMS, BusinessProfileForm, CashCloseForm, EmailVerificationForm, ExcelImportForm, ExpenseForm, IntegrationConnectionForm, LoginForm, OnboardingForm, PasswordResetRequestForm, PasswordResetVerifyForm, PurchaseForm, RegisterForm, SaleForm, StockMovementForm, StockTransferForm, TeamMemberForm
 from .models import (
@@ -157,12 +202,11 @@ def send_email_verification_code(user):
         code_hash=make_password(code),
         expires_at=timezone.now() + timedelta(minutes=15),
     )
-    send_mail(
+    send_brevo_email(
+        to_email=user.email,
         subject='Verify your SMS Suite account',
-        message=f'Your SMS Suite verification code is {code}. It expires in 15 minutes.',
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[user.email],
-        fail_silently=settings.DEBUG,
+        html_content=f'<p>Your SMS Suite verification code is <strong>{code}</strong>. It expires in 15 minutes.</p>',
+        plain_content=f'Your SMS Suite verification code is {code}. It expires in 15 minutes.'
     )
     return code if settings.DEBUG else ''
 
@@ -402,16 +446,11 @@ def password_reset_complete(request):
 
 
 def send_password_reset_code(email, code):
-    send_mail(
+    send_brevo_email(
+        to_email=email,
         subject='Your SMS Suite verification code',
-        message=(
-            'Use this verification code to reset your SMS Suite password:\n\n'
-            f'{code}\n\n'
-            'This code expires in 10 minutes. If you did not request it, ignore this email.'
-        ),
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[email],
-        fail_silently=False,
+        html_content=f'<p>Use this verification code to reset your SMS Suite password:</p><p><strong>{code}</strong></p><p>This code expires in 10 minutes. If you did not request it, ignore this email.</p>',
+        plain_content=f'Use this verification code to reset your SMS Suite password:\n\n{code}\n\nThis code expires in 10 minutes. If you did not request it, ignore this email.'
     )
 
 
