@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Excel Import - SMS Suite{% endblock %}
+{% block page_title %}Smart Excel Import{% endblock %}
+{% block content %}
+<section class="grid gap-6 xl:grid-cols-[420px_1fr]">
+  <form method="post" enctype="multipart/form-data" class="panel p-5">
+    {% csrf_token %}
+    <h2 class="mb-4 font-bold text-slate-950">Upload business data</h2>
+    <div class="space-y-4">{% for field in form %}<label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}</label>{% endfor %}</div>
+    <button class="btn-primary mt-5 w-full"><i class="fa-solid fa-file-import"></i>Import products</button>
+  </form>
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Automatic column mapping</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-4 py-3">Excel column</th><th class="px-4 py-3">SMS field</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="px-4 py-3">Item Name, Product, Name</td><td class="px-4 py-3">Product Name</td></tr>
+          <tr><td class="px-4 py-3">Qty, Stock, Quantity</td><td class="px-4 py-3">Stock</td></tr>
+          <tr><td class="px-4 py-3">Cost Price, Buying Price</td><td class="px-4 py-3">Buying Price</td></tr>
+          <tr><td class="px-4 py-3">Selling Price, Price</td><td class="px-4 py-3">Selling Price</td></tr>
+          <tr><td class="px-4 py-3">Supplier, Vendor</td><td class="px-4 py-3">Supplier</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

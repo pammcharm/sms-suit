@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Employees - SMS Suite{% endblock %}
+{% block page_title %}Employee Management{% endblock %}
+{% block content %}
+<div class="panel overflow-hidden">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Employee</th><th class="px-5 py-3">Role</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Salary</th><th class="px-5 py-3">Status</th></tr></thead>
+    <tbody class="divide-y divide-slate-100">{% for employee in employees %}<tr><td class="px-5 py-4 font-semibold">{{ employee.name }}</td><td class="px-5 py-4">{{ employee.get_role_display }}</td><td class="px-5 py-4">{{ employee.branch }}</td><td class="px-5 py-4">R{{ employee.salary }}</td><td class="px-5 py-4"><span class="badge bg-emerald-100 text-emerald-800">Active</span></td></tr>{% endfor %}</tbody>
+  </table>
+</div>
+{% endblock %}

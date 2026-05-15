@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Delete {{ config.title }} - SMS Suite{% endblock %}
+{% block page_title %}Delete {{ config.title }}{% endblock %}
+{% block content %}
+<form method="post" class="panel max-w-xl p-5">
+  {% csrf_token %}
+  <p class="text-slate-700">Delete <strong>{{ item }}</strong>?</p>
+  <div class="mt-5 flex gap-3">
+    <button class="rounded-md bg-rose-600 px-4 py-2 text-sm font-semibold text-white">Delete</button>
+    <a class="rounded-md border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700" href="{% url 'crud_list' resource %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

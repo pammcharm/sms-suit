@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Stock Movements - SMS Suite{% endblock %}
+{% block page_title %}Stock Movements{% endblock %}
+{% block content %}
+<div class="grid gap-6 xl:grid-cols-[380px_1fr]">
+  <form method="post" class="panel">
+    {% csrf_token %}
+    <h2 class="mb-4 font-bold text-slate-950">Record stock in or out</h2>
+    <div class="space-y-4">
+      {% for field in form %}
+      <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}{% if field.errors %}<span class="mt-1 block text-xs text-rose-600">{{ field.errors|striptags }}</span>{% endif %}</label>
+      {% endfor %}
+    </div>
+    <button class="btn-primary mt-5 w-full py-3"><i class="fa-solid fa-box-open"></i>Record movement</button>
+  </form>
+
+  <section class="panel overflow-hidden">
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+        <tr><th class="px-5 py-3">Product</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Type</th><th class="px-5 py-3">Qty</th><th class="px-5 py-3">Date</th></tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        {% for movement in movements %}
+        <tr>
+          <td class="px-5 py-4">{{ movement.product.name }}</td>
+          <td class="px-5 py-4">{{ movement.branch.name }}</td>
+          <td class="px-5 py-4">{{ movement.get_movement_type_display }}</td>
+          <td class="px-5 py-4 font-semibold {% if movement.quantity < 0 %}text-rose-700{% else %}text-emerald-700{% endif %}">{{ movement.quantity }}</td>
+          <td class="px-5 py-4">{{ movement.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td class="px-5 py-6 text-slate-500" colspan="5">No stock movements yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

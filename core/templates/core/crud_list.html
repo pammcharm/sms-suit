@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load core_extras %}
+{% block title %}{{ config.title }} - SMS Suite{% endblock %}
+{% block page_title %}{{ config.title }}{% endblock %}
+{% block content %}
+<div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+  <a class="btn-primary" href="{% url 'crud_create' resource %}"><i class="fa-solid fa-plus"></i>Add {{ config.title }}</a>
+  <a class="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700" href="{% url 'import_excel' %}"><i class="fa-solid fa-file-import"></i>Import</a>
+</div>
+<div class="panel overflow-hidden">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+      <tr>{% for field in config.fields %}<th class="px-5 py-3">{{ field|title }}</th>{% endfor %}<th class="px-5 py-3 text-right">Actions</th></tr>
+    </thead>
+    <tbody class="divide-y divide-slate-100">
+      {% for item in items %}
+      <tr class="hover:bg-blue-50/50">
+        {% for field in config.fields %}<td class="px-5 py-4">{{ item|get_attr:field }}</td>{% endfor %}
+        <td class="px-5 py-4 text-right">
+          <a class="mr-2 text-blue-700" href="{% url 'crud_update' resource item.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+          <a class="text-rose-600" href="{% url 'crud_delete' resource item.pk %}"><i class="fa-solid fa-trash"></i></a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td class="px-5 py-6 text-slate-500" colspan="20">No records yet. Add the first one or import from Excel.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

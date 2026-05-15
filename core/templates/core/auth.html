@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if show_register %}Create Account{% else %}Sign In{% endif %} - SMS Suite</title>
+  <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="min-h-screen bg-slate-950">
+  <main class="grid min-h-screen lg:grid-cols-[500px_1fr]">
+    <section class="flex items-center justify-center bg-white px-6 py-10">
+      <div class="w-full max-w-sm">
+        <div class="mb-8">
+          <span class="grid h-14 w-14 place-items-center rounded-lg bg-blue-600 text-white"><i class="fa-solid fa-shield-halved"></i></span>
+          <h2 class="mt-5 text-2xl font-bold text-slate-950">{% if show_register %}Create your account{% else %}Welcome back{% endif %}</h2>
+          <p class="mt-2 text-sm text-slate-500">{% if show_register %}Use your work email. You can create a business or join one you were invited to.{% else %}Sign in to continue to your business workspace.{% endif %}</p>
+        </div>
+
+        {% if messages %}
+        <div class="mb-4 space-y-2">
+          {% for message in messages %}
+          <div class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if show_register %}
+        <form method="post" action="{% url 'register' %}" class="space-y-4">
+          {% csrf_token %}
+          {% for field in register_form %}
+          <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}{% if field.errors %}<span class="mt-1 block text-xs text-rose-600">{{ field.errors|striptags }}</span>{% endif %}</label>
+          {% endfor %}
+          {% if register_form.non_field_errors %}<p class="text-sm text-rose-600">{{ register_form.non_field_errors|striptags }}</p>{% endif %}
+          <button class="btn-primary w-full py-3" type="submit"><i class="fa-solid fa-user-plus"></i>Create account</button>
+          <p class="text-center text-sm text-slate-500">Already registered? <a class="font-semibold text-blue-700" href="{% url 'auth' %}">Sign in</a></p>
+        </form>
+        {% else %}
+        <form method="post" action="{% url 'auth' %}" class="space-y-4">
+          {% csrf_token %}
+          <input type="hidden" name="mode" value="login">
+          {% for field in login_form %}
+          <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}{% if field.errors %}<span class="mt-1 block text-xs text-rose-600">{{ field.errors|striptags }}</span>{% endif %}</label>
+          {% endfor %}
+          {% if login_form.non_field_errors %}<p class="text-sm text-rose-600">{{ login_form.non_field_errors|striptags }}</p>{% endif %}
+          <div class="flex items-center justify-between text-sm">
+            <a class="font-semibold text-blue-700" href="{% url 'password_reset' %}">Forgot password?</a>
+            <a class="font-semibold text-blue-700" href="{% url 'register' %}">Create account</a>
+          </div>
+          <button class="btn-primary w-full py-3" type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i>Sign in</button>
+        </form>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="relative hidden overflow-hidden px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
+      <div class="absolute inset-0 bg-[linear-gradient(135deg,#08111f,#12314a_50%,#0f766e)]"></div>
+      <div class="relative z-10">
+        <a href="{% url 'tour' %}" class="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white text-blue-700"><i class="fa-solid fa-layer-group"></i></a>
+        <h1 class="mt-8 max-w-xl text-5xl font-bold leading-tight">A secure command center for Rwanda businesses.</h1>
+        <p class="mt-5 max-w-lg text-lg text-blue-100">Manage sales, services, customers, staff access, mobile payments, stock, and branches from one private workspace.</p>
+      </div>
+      <div class="relative z-10 grid grid-cols-3 gap-4 text-sm">
+        <div class="rounded-lg bg-white/10 p-4 backdrop-blur"><strong class="block text-2xl">Access</strong>Owner and staff roles</div>
+        <div class="rounded-lg bg-white/10 p-4 backdrop-blur"><strong class="block text-2xl">Sales</strong>Products and services</div>
+        <div class="rounded-lg bg-white/10 p-4 backdrop-blur"><strong class="block text-2xl">Stock</strong>In, out, transfers</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

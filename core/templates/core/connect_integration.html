@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Connect {{ connection.display_name }} - SMS Suite{% endblock %}
+{% block page_title %}Connect {{ connection.display_name }}{% endblock %}
+{% block content %}
+<section class="grid gap-6 xl:grid-cols-[1fr_420px]">
+  <form method="post" class="panel p-5">
+    {% csrf_token %}
+    <h2 class="mb-4 font-bold text-slate-950">{{ connection.display_name }} settings</h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      {% for field in form %}
+      <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}</label>
+      {% endfor %}
+    </div>
+    <button class="btn-primary mt-5"><i class="fa-solid fa-plug-circle-check"></i>Save connection</button>
+    {% if connection.connection_type == 'google_sheets' or connection.connection_type == 'excel_online' or connection.connection_type == 'offline_excel' %}
+    <a class="ml-2 mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700" href="{% url 'sync_integration' connection.connection_type %}"><i class="fa-solid fa-arrows-rotate"></i>Sync now</a>
+    {% endif %}
+  </form>
+  <aside class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Quick guide</h2>
+    {% if connection.connection_type == 'google_sheets' %}
+    <p class="text-sm text-slate-600">Paste a shared Google Sheet URL. SMS converts it to CSV export and imports products into your main branch.</p>
+    <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm text-slate-600"><li>Open Google Sheets.</li><li>Share the sheet so the link can be viewed.</li><li>Paste the sheet URL in Account identifier.</li><li>Save, then click Sync now.</li></ol>
+    {% elif connection.connection_type == 'excel_online' %}
+    <p class="text-sm text-slate-600">Paste a OneDrive/Excel Online CSV or XLSX sharing link. For private Microsoft Graph sync, keep this record and add API credentials later.</p>
+    <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm text-slate-600"><li>Open Excel Online.</li><li>Share or export the workbook as CSV/XLSX.</li><li>Paste the link in Account identifier.</li><li>Save, then click Sync now.</li></ol>
+    {% elif connection.connection_type == 'whatsapp' %}
+    <p class="text-sm text-slate-600">Add your WhatsApp Business number. Customer cards and receipts now open WhatsApp with a ready message.</p>
+    <p class="mt-4 text-sm text-slate-600">Use safe click-to-chat links now, then connect Meta API credentials when automated WhatsApp messaging is enabled for your business.</p>
+    {% elif connection.connection_type == 'offline_excel' %}
+    <p class="text-sm text-slate-600">Use import/export when internet is weak. Staff can sell offline, then upload the Excel file later.</p>
+    <a class="btn-primary mt-4" href="{% url 'export_excel' %}"><i class="fa-solid fa-download"></i>Download offline Excel</a>
+    {% else %}
+    <p class="text-sm text-slate-600">Add your account number and keep manual confirmation for MVP. API verification can be added later.</p>
+    {% endif %}
+  </aside>
+</section>
+{% endblock %}

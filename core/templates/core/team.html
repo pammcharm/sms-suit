@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Team & Roles - SMS Suite{% endblock %}
+{% block page_title %}Team & Roles{% endblock %}
+{% block content %}
+<div class="grid gap-6 xl:grid-cols-[380px_1fr]">
+  <form method="post" class="panel">
+    {% csrf_token %}
+    <h2 class="mb-4 font-bold text-slate-950">Add or update staff access</h2>
+    <div class="space-y-4">
+      {% for field in form %}
+      <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}{% if field.errors %}<span class="mt-1 block text-xs text-rose-600">{{ field.errors|striptags }}</span>{% endif %}</label>
+      {% endfor %}
+    </div>
+    <button class="btn-primary mt-5 w-full py-3"><i class="fa-solid fa-user-shield"></i>Save access</button>
+  </form>
+
+  <section class="panel overflow-hidden">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="font-bold text-slate-950">People with access to {{ profile.name }}</h2>
+      <span class="badge bg-blue-100 text-blue-800">{{ accesses|length }} members</span>
+    </div>
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+        <tr><th class="px-5 py-3">Email</th><th class="px-5 py-3">Role</th><th class="px-5 py-3">Status</th><th class="px-5 py-3">Account</th></tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        {% for access in accesses %}
+        <tr>
+          <td class="px-5 py-4">{% if access.email %}{{ access.email }}{% elif access.user %}{{ access.user.email }}{% endif %}</td>
+          <td class="px-5 py-4">{{ access.role }}</td>
+          <td class="px-5 py-4">{% if access.is_active %}<span class="badge bg-emerald-100 text-emerald-800">Active</span>{% else %}<span class="badge bg-slate-100 text-slate-600">Inactive</span>{% endif %}</td>
+          <td class="px-5 py-4">{% if access.user %}Linked{% else %}Pending registration{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr><td class="px-5 py-6 text-slate-500" colspan="4">No team access has been added yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Purchases - SMS Suite{% endblock %}
+{% block page_title %}Purchases & Stock Receiving{% endblock %}
+{% block content %}
+<section class="grid gap-6 xl:grid-cols-[420px_1fr]">
+  <form method="post" class="panel p-5 space-y-4">{% csrf_token %}
+    <h2 class="text-lg font-bold">Receive stock</h2>
+    {{ form.non_field_errors }}
+    {% for field in form %}<label class="block text-sm font-semibold text-slate-700">{{ field.label }}{{ field }}{% if field.help_text %}<small class="block text-slate-500">{{ field.help_text }}</small>{% endif %}{{ field.errors }}</label>{% endfor %}
+    <button class="btn-primary w-full" type="submit"><i class="fa-solid fa-plus"></i>Save purchase & update stock</button>
+  </form>
+  <div class="panel overflow-hidden">
+    <div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold">Recent purchases</h2></div>
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Purchase</th><th class="px-5 py-3">Supplier</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Total</th><th class="px-5 py-3">Date</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+      {% for purchase in purchases %}<tr><td class="px-5 py-4">#{{ purchase.id }}{% if purchase.invoice_number %}<small class="block text-slate-500">{{ purchase.invoice_number }}</small>{% endif %}</td><td class="px-5 py-4">{{ purchase.supplier|default:'No supplier' }}</td><td class="px-5 py-4">{{ purchase.branch }}</td><td class="px-5 py-4 font-semibold">R{{ purchase.total_cost|floatformat:2 }}</td><td class="px-5 py-4">{{ purchase.created_at }}</td></tr>{% empty %}<tr><td colspan="5" class="px-5 py-4">No purchases yet.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

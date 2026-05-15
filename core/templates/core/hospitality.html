@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Hotel & Restaurant - SMS Suite{% endblock %}
+{% block page_title %}Hotel & Restaurant Management{% endblock %}
+{% block content %}
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+  {% for unit in units %}
+  <div class="stat-card"><div class="flex justify-between"><span class="grid h-10 w-10 place-items-center rounded-md bg-blue-50 text-blue-700"><i class="fa-solid {% if unit.unit_type == 'room' %}fa-bed{% else %}fa-utensils{% endif %}"></i></span><span class="badge bg-slate-100 text-slate-700">{{ unit.status }}</span></div><h2 class="mt-4 font-bold">{{ unit.name }}</h2><p class="text-sm text-slate-500">{{ unit.branch }}</p><p class="mt-3 text-sm">{% if unit.current_guest %}{{ unit.current_guest }}{% else %}No guest assigned{% endif %}</p><p class="mt-3 font-semibold">R{{ unit.daily_rate }}</p></div>
+  {% endfor %}
+</div>
+{% endblock %}

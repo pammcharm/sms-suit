@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Reports - SMS Suite{% endblock %}
+{% block page_title %}Financial Reports & Analytics{% endblock %}
+{% block content %}
+<div class="mb-5 flex justify-end"><a class="btn-primary" href="?export=csv"><i class="fa-solid fa-download"></i>Export Sales CSV</a></div>
+<section class="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+  <div class="stat-card"><p class="text-sm text-slate-500">Revenue</p><strong class="mt-2 block text-3xl">R{{ sales_total|floatformat:2 }}</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">Gross profit</p><strong class="mt-2 block text-3xl">R{{ profit_total|floatformat:2 }}</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">Expenses</p><strong class="mt-2 block text-3xl">R{{ expense_total|floatformat:2 }}</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">Net profit</p><strong class="mt-2 block text-3xl">R{{ net_profit|floatformat:2 }}</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">Customer debt</p><strong class="mt-2 block text-3xl">R{{ debt_total|floatformat:2 }}</strong></div>
+</section>
+<section class="grid gap-6 xl:grid-cols-2">
+  <div class="panel p-5"><h2 class="mb-4 font-bold">Top products</h2><div class="space-y-3">{% for product in top_products %}<div><div class="mb-1 flex justify-between text-sm"><span>{{ product.name }}</span><strong>{{ product.units_sold|default:0 }} units</strong></div><div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-cyan-500" style="width:{% widthratio product.units_sold|default:0 10 100 %}%"></div></div></div>{% empty %}<p class="text-sm text-slate-500">No product sales yet.</p>{% endfor %}</div></div>
+  <div class="panel p-5"><h2 class="mb-4 font-bold">Payment mix</h2><div class="space-y-3">{% for row in payment_methods %}<div class="flex items-center justify-between rounded-md bg-slate-50 px-3 py-3"><span class="capitalize">{{ row.payment_method }}</span><strong>{{ row.total }}</strong></div>{% empty %}<p class="text-sm text-slate-500">No payments yet.</p>{% endfor %}</div></div>
+</section>
+<section class="mt-6 grid gap-6 xl:grid-cols-2">
+  <div class="panel overflow-hidden"><div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold">Recent expenses</h2></div><table class="w-full text-left text-sm"><tbody class="divide-y divide-slate-100">{% for expense in recent_expenses %}<tr><td class="px-5 py-3">{{ expense.title }}<small class="block text-slate-500">{{ expense.branch }} · {{ expense.category }}</small></td><td class="px-5 py-3 text-right font-semibold">R{{ expense.amount }}</td></tr>{% empty %}<tr><td class="px-5 py-4">No expenses yet.</td></tr>{% endfor %}</tbody></table></div>
+  <div class="panel overflow-hidden"><div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold">Recent purchases</h2></div><table class="w-full text-left text-sm"><tbody class="divide-y divide-slate-100">{% for purchase in recent_purchases %}<tr><td class="px-5 py-3">Purchase #{{ purchase.id }}<small class="block text-slate-500">{{ purchase.branch }} · {{ purchase.supplier|default:'No supplier' }}</small></td><td class="px-5 py-3 text-right font-semibold">R{{ purchase.total_cost }}</td></tr>{% empty %}<tr><td class="px-5 py-4">No purchases yet.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

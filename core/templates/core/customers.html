@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Customers - SMS Suite{% endblock %}
+{% block page_title %}Customer Loyalty{% endblock %}
+{% block content %}
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  {% for row in customer_rows %}
+  <div class="stat-card">
+    <div class="flex items-center gap-3"><span class="grid h-11 w-11 place-items-center rounded-md bg-blue-50 text-blue-700"><i class="fa-solid fa-user"></i></span><div><strong>{{ row.customer.name }}</strong><p class="text-sm text-slate-500">{{ row.customer.phone|default:'No phone' }}</p></div></div>
+    <div class="mt-4 flex justify-between text-sm"><span>Loyalty points</span><strong>{{ row.customer.loyalty_points }}</strong></div>
+    <div class="mt-2 flex justify-between text-sm"><span>Debt</span><strong class="text-rose-600">R{{ row.customer.debt_balance }}</strong></div>
+    {% if row.whatsapp_url %}<a class="mt-4 inline-flex items-center gap-2 rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white" target="_blank" href="{{ row.whatsapp_url }}"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

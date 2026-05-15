@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: sms-suite
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn sms_project.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "0"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: CSRF_COOKIE_SECURE
+        value: "1"
+      - key: SECURE_SSL_REDIRECT
+        value: "1"
+      - key: SECURE_HSTS_SECONDS
+        value: "31536000"
+      - key: SECURE_HSTS_INCLUDE_SUBDOMAINS
+        value: "1"
+      - key: SECURE_HSTS_PRELOAD
+        value: "1"
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: ""
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_HOST_USER
+        value: ""
+      - key: EMAIL_HOST_PASSWORD
+        value: ""
+      - key: EMAIL_USE_TLS
+        value: "1"
+      - key: DEFAULT_FROM_EMAIL
+        value: "SMS Suite <no-reply@example.com>"
+      - key: SITE_URL
+        value: "https://sms-suite.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.12.10"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sms-suite-db
+          property: connectionString
+
+databases:
+  - name: sms-suite-db
+    plan: free

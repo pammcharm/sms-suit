@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Payments - SMS Suite{% endblock %}
+{% block page_title %}MoMo, Airtel & Cash Payments{% endblock %}
+{% block content %}
+<section class="mb-6 grid gap-4 md:grid-cols-3">
+  {% for row in grouped %}
+  <div class="stat-card"><p class="text-sm capitalize text-slate-500">{{ row.method }} - {{ row.status }}</p><strong class="mt-2 block text-2xl">R{{ row.total|floatformat:2 }}</strong><span class="text-xs text-slate-500">{{ row.count }} transactions</span></div>
+  {% endfor %}
+</section>
+<div class="panel overflow-hidden">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Method</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Amount</th><th class="px-5 py-3">Status</th><th class="px-5 py-3">Reference</th></tr></thead>
+    <tbody class="divide-y divide-slate-100">{% for payment in payments %}<tr><td class="px-5 py-4">{{ payment.get_method_display }}</td><td class="px-5 py-4">{{ payment.branch }}</td><td class="px-5 py-4 font-semibold">R{{ payment.amount }}</td><td class="px-5 py-4"><span class="badge bg-blue-50 text-blue-700">{{ payment.status }}</span></td><td class="px-5 py-4">{{ payment.transaction_reference|default:'Manual confirmation' }}</td></tr>{% endfor %}</tbody>
+  </table>
+</div>
+{% endblock %}

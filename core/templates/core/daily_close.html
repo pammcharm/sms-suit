@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Daily Close - SMS Suite{% endblock %}
+{% block page_title %}Daily Cash Closing{% endblock %}
+{% block content %}
+<section class="grid gap-6 xl:grid-cols-[420px_1fr]">
+  <form method="post" class="panel p-5 space-y-4">{% csrf_token %}
+    <h2 class="text-lg font-bold">Close cash drawer</h2>
+    <p class="text-sm text-slate-500">Record closing cash and compare it with today’s cash payments.</p>
+    {{ form.non_field_errors }}
+    {% for field in form %}<label class="block text-sm font-semibold text-slate-700">{{ field.label }}{{ field }}{{ field.errors }}</label>{% endfor %}
+    <button class="btn-primary w-full" type="submit"><i class="fa-solid fa-lock"></i>Save daily close</button>
+  </form>
+  <div class="panel overflow-hidden">
+    <div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold">Closing history</h2></div>
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Cashier</th><th class="px-5 py-3">Expected</th><th class="px-5 py-3">Actual</th><th class="px-5 py-3">Diff</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        {% for session in sessions %}<tr><td class="px-5 py-4">{{ session.branch }}</td><td class="px-5 py-4">{{ session.cashier|default:'-' }}</td><td class="px-5 py-4">R{{ session.expected_cash|floatformat:2 }}</td><td class="px-5 py-4">R{{ session.closing_cash|floatformat:2 }}</td><td class="px-5 py-4 font-semibold">R{{ session.difference|floatformat:2 }}</td></tr>{% empty %}<tr><td class="px-5 py-4" colspan="5">No closing sessions yet.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

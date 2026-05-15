@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ mode }} {{ config.title }} - SMS Suite{% endblock %}
+{% block page_title %}{{ mode }} {{ config.title }}{% endblock %}
+{% block content %}
+<form method="post" class="panel max-w-4xl p-5">
+  {% csrf_token %}
+  <div class="grid gap-4 md:grid-cols-2">
+    {% for field in form %}
+    <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}{% if field.errors %}<span class="mt-1 block text-xs text-rose-600">{{ field.errors|striptags }}</span>{% endif %}</label>
+    {% endfor %}
+  </div>
+  <div class="mt-5 flex gap-3">
+    <button class="btn-primary"><i class="fa-solid fa-floppy-disk"></i>Save</button>
+    <a class="rounded-md border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700" href="{% url 'crud_list' resource %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

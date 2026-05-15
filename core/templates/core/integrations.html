@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Setup - SMS Suite{% endblock %}
+{% block page_title %}Business Setup & Connectors{% endblock %}
+{% block content %}
+<section class="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  {% for connection in connections %}
+  <a href="{% url 'connect_integration' connection.connection_type %}" class="stat-card block">
+    <div class="flex items-center justify-between">
+      <span class="grid h-11 w-11 place-items-center rounded-md bg-blue-50 text-blue-700">
+        <i class="fa-solid {% if connection.connection_type == 'google_sheets' %}fa-table{% elif connection.connection_type == 'excel_online' %}fa-file-excel{% elif connection.connection_type == 'whatsapp' %}fa-comment-dots{% elif connection.connection_type == 'offline_excel' %}fa-download{% elif connection.connection_type == 'mtn_momo' %}fa-mobile-screen{% else %}fa-money-bill-wave{% endif %}"></i>
+      </span>
+      <span class="badge {% if connection.status == 'connected' %}bg-emerald-100 text-emerald-800{% else %}bg-amber-100 text-amber-800{% endif %}">{{ connection.get_status_display }}</span>
+    </div>
+    <h2 class="mt-4 font-bold text-slate-950">{{ connection.display_name }}</h2>
+    <p class="mt-2 text-sm text-slate-500">{{ connection.account_identifier }}</p>
+  </a>
+  {% endfor %}
+</section>
+
+<section class="grid gap-6 xl:grid-cols-[1fr_420px]">
+  <form method="post" class="panel p-5">
+    {% csrf_token %}
+    <h2 class="mb-4 font-bold text-slate-950">Business profile</h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      {% for field in form %}
+      {% if field.name == 'selected_modules' %}
+        <div class="md:col-span-2">
+          <span class="mb-2 block text-sm font-medium text-slate-700">{{ field.label }}</span>
+          <div class="grid gap-2 md:grid-cols-3">{% for checkbox in field %}<label class="rounded-md border border-slate-200 p-3 text-sm">{{ checkbox.tag }} {{ checkbox.choice_label }}</label>{% endfor %}</div>
+        </div>
+      {% else %}
+        <label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}</label>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <button class="btn-primary mt-5"><i class="fa-solid fa-floppy-disk"></i>Save setup</button>
+  </form>
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Fast start</h2>
+    <div class="space-y-3">
+      <a class="flex items-center justify-between rounded-md bg-blue-50 p-3 text-sm font-semibold text-blue-800" href="{% url 'crud_create' 'branches' %}">Add branch<i class="fa-solid fa-arrow-right"></i></a>
+      <a class="flex items-center justify-between rounded-md bg-cyan-50 p-3 text-sm font-semibold text-cyan-800" href="{% url 'import_excel' %}">Import Excel<i class="fa-solid fa-arrow-right"></i></a>
+      <a class="flex items-center justify-between rounded-md bg-emerald-50 p-3 text-sm font-semibold text-emerald-800" href="{% url 'crud_create' 'products' %}">Add product<i class="fa-solid fa-arrow-right"></i></a>
+      <a class="flex items-center justify-between rounded-md bg-slate-50 p-3 text-sm font-semibold text-slate-800" href="{% url 'crud_create' 'customers' %}">Add customer<i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

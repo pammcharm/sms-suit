@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tour - SMS Suite</title>
+  <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="bg-slate-950 text-white">
+  <main>
+    <section class="mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-5 py-10 lg:grid-cols-[1fr_520px]">
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full bg-blue-500/15 px-4 py-2 text-sm font-semibold text-blue-100"><i class="fa-solid fa-bolt"></i>Rwanda business management in minutes</span>
+        <h1 class="mt-6 text-4xl font-bold leading-tight md:text-6xl">Run sales, stock, payments, customers, and branches from one smart workspace.</h1>
+        <p class="mt-5 max-w-2xl text-lg text-slate-300">SMS Suite helps shops, boutiques, restaurants, pharmacies, hotels, salons, garages, mini markets, hardware stores, and wholesalers start fast with secure accounts, Excel import, WhatsApp workflows, and mobile money tracking.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn-primary px-5 py-3" href="{% url 'auth' %}"><i class="fa-solid fa-right-to-bracket"></i>Get started</a>
+          <a class="rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10" href="#steps">How it works</a>
+        </div>
+      </div>
+      <div class="rounded-lg border border-white/10 bg-white p-4 text-slate-950 shadow-2xl shadow-blue-950/40">
+        <div class="rounded-md bg-slate-100 p-4">
+          <div class="mb-4 flex items-center justify-between">
+            <strong>Today overview</strong>
+            <span class="badge bg-emerald-100 text-emerald-800">Live</span>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded-md bg-white p-4"><span class="text-sm text-slate-500">Sales</span><strong class="mt-2 block text-2xl">R 128,400</strong></div>
+            <div class="rounded-md bg-white p-4"><span class="text-sm text-slate-500">Profit</span><strong class="mt-2 block text-2xl">R 42,900</strong></div>
+            <div class="rounded-md bg-white p-4"><span class="text-sm text-slate-500">Low stock</span><strong class="mt-2 block text-2xl">6 items</strong></div>
+            <div class="rounded-md bg-white p-4"><span class="text-sm text-slate-500">MoMo</span><strong class="mt-2 block text-2xl">Matched</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps" class="bg-white px-5 py-16 text-slate-950">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold">How to use the app</h2>
+        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div class="stat-card"><i class="fa-solid fa-user-lock text-2xl text-blue-600"></i><h3 class="mt-4 font-bold">1. Login</h3><p class="mt-2 text-sm text-slate-500">Use email and password login to create your secure owner account.</p></div>
+          <div class="stat-card"><i class="fa-solid fa-store text-2xl text-blue-600"></i><h3 class="mt-4 font-bold">2. Setup business</h3><p class="mt-2 text-sm text-slate-500">Choose business type, supported modules, WhatsApp, MoMo, Airtel, and offline Excel.</p></div>
+          <div class="stat-card"><i class="fa-solid fa-file-import text-2xl text-blue-600"></i><h3 class="mt-4 font-bold">3. Add data</h3><p class="mt-2 text-sm text-slate-500">Import Excel or add branches, products, customers, employees, suppliers, and expenses manually.</p></div>
+          <div class="stat-card"><i class="fa-solid fa-chart-line text-2xl text-blue-600"></i><h3 class="mt-4 font-bold">4. Run operations</h3><p class="mt-2 text-sm text-slate-500">Sell from POS, track payments, monitor stock, export reports, and manage every branch.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SMS Suite{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="min-h-screen">
+  <div class="flex min-h-screen">
+    <aside class="hidden w-72 border-r border-slate-200 bg-white px-5 py-6 lg:block">
+      <a href="{% url 'dashboard' %}" class="mb-8 flex items-center gap-3">
+        <span class="grid h-11 w-11 place-items-center rounded-lg bg-blue-600 text-white"><i class="fa-solid fa-layer-group"></i></span>
+        <span>
+          <strong class="block text-lg text-slate-950">SMS Suite</strong>
+          <span class="text-xs font-medium uppercase tracking-wide text-blue-600">Smart Management</span>
+        </span>
+      </a>
+      <nav class="space-y-1">
+        <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}nav-link-active{% endif %}" href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-line w-5"></i>Dashboard</a>
+        {% if 'pos' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'pos' %}nav-link-active{% endif %}" href="{% url 'pos' %}"><i class="fa-solid fa-cash-register w-5"></i>POS</a>
+        {% endif %}
+        {% if 'inventory' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'products' %}"><i class="fa-solid fa-boxes-stacked w-5"></i>Products</a>
+        {% endif %}
+        {% if 'customers' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'customers' %}"><i class="fa-solid fa-users w-5"></i>Customers</a>
+        {% endif %}
+        {% if 'employees' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'employees' %}"><i class="fa-solid fa-id-badge w-5"></i>Employees</a>
+        {% endif %}
+        <a class="nav-link" href="{% url 'crud_list' 'branches' %}"><i class="fa-solid fa-code-branch w-5"></i>Branches</a>
+        {% if 'suppliers' in active_modules or 'inventory' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'suppliers' %}"><i class="fa-solid fa-truck-field w-5"></i>Suppliers</a>
+        {% endif %}
+        {% if 'hospitality' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'hospitality' %}"><i class="fa-solid fa-hotel w-5"></i>Hotel & Restaurant</a>
+        {% endif %}
+        {% if 'payments' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'payments' %}"><i class="fa-solid fa-mobile-screen-button w-5"></i>Payments</a>
+        {% endif %}
+        {% if 'expenses' in active_modules %}
+        <a class="nav-link" href="{% url 'crud_list' 'expenses' %}"><i class="fa-solid fa-money-bill-trend-up w-5"></i>Expenses</a>
+        {% endif %}
+        {% if 'transfers' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'transfers' %}nav-link-active{% endif %}" href="{% url 'transfers' %}"><i class="fa-solid fa-right-left w-5"></i>Transfers</a>
+        {% endif %}
+        {% if 'inventory' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'stock_movements' %}nav-link-active{% endif %}" href="{% url 'stock_movements' %}"><i class="fa-solid fa-box-open w-5"></i>Stock Movements</a>
+        {% endif %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'team' %}nav-link-active{% endif %}" href="{% url 'team' %}"><i class="fa-solid fa-user-shield w-5"></i>Team & Roles</a>
+        <a class="nav-link {% if request.resolver_match.url_name == 'notifications' %}nav-link-active{% endif %}" href="{% url 'notifications' %}"><i class="fa-solid fa-bell w-5"></i>Alerts</a>
+        {% if 'inventory' in active_modules %}<a class="nav-link {% if request.resolver_match.url_name == 'purchases' %}nav-link-active{% endif %}" href="{% url 'purchases' %}"><i class="fa-solid fa-truck-ramp-box w-5"></i>Purchases</a>{% endif %}
+        {% if 'payments' in active_modules %}<a class="nav-link {% if request.resolver_match.url_name == 'daily_close' %}nav-link-active{% endif %}" href="{% url 'daily_close' %}"><i class="fa-solid fa-cash-register w-5"></i>Daily Close</a>{% endif %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'backup_center' %}nav-link-active{% endif %}" href="{% url 'backup_center' %}"><i class="fa-solid fa-database w-5"></i>Backups</a>
+        {% if 'inventory' in active_modules or 'integrations' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'import_excel' %}nav-link-active{% endif %}" href="{% url 'import_excel' %}"><i class="fa-solid fa-file-excel w-5"></i>Excel Import</a>
+        {% endif %}
+        {% if 'integrations' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'integrations' %}nav-link-active{% endif %}" href="{% url 'integrations' %}"><i class="fa-solid fa-plug w-5"></i>Setup</a>
+        {% endif %}
+        {% if 'reports' in active_modules %}
+        <a class="nav-link {% if request.resolver_match.url_name == 'reports' %}nav-link-active{% endif %}" href="{% url 'reports' %}"><i class="fa-solid fa-chart-pie w-5"></i>Reports</a>
+        {% endif %}
+      </nav>
+    </aside>
+    <main class="flex-1">
+      <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur md:px-8">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Modern business command center</p>
+            <h1 class="text-xl font-bold text-slate-950 md:text-2xl">{% block page_title %}Dashboard{% endblock %}</h1>
+            {% if request.user.email %}<p class="mt-1 text-xs text-slate-500">{{ request.user.email }}</p>{% endif %}
+          </div>
+          {% if 'pos' in active_modules %}<a href="{% url 'pos' %}" class="btn-primary"><i class="fa-solid fa-plus"></i>New sale</a>{% endif %}
+          <a href="{% url 'logout' %}" class="hidden rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 md:inline-flex"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+      </header>
+      <div class="px-4 py-6 md:px-8">
+        {% if messages %}
+          <div class="mb-5 space-y-2">
+            {% for message in messages %}
+              <div class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+  <script src="{% static 'src/app.js' %}"></script>
+</body>
+</html>

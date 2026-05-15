@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+.env
+.venv/
+venv/
+env/
+staticfiles/
+node_modules/
+.DS_Store
+*.log
+firebase-service-account*.json

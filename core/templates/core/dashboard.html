@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - SMS Suite{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+{% if profile.business_type == 'school' %}
+<section class="mb-6 rounded-lg bg-blue-600 p-6 text-white">
+  <h2 class="text-2xl font-bold">School dashboard</h2>
+  <p class="mt-2 text-blue-50">Track students as customers, fees as payments, staff, expenses, reports, and parent WhatsApp communication.</p>
+</section>
+{% elif profile.business_type == 'club' %}
+<section class="mb-6 rounded-lg bg-emerald-600 p-6 text-white">
+  <h2 class="text-2xl font-bold">Club dashboard</h2>
+  <p class="mt-2 text-emerald-50">Manage members, dues, staff, payments, expenses, reports, and WhatsApp updates from one workspace.</p>
+</section>
+{% elif profile.business_type == 'hotel' %}
+<section class="mb-6 rounded-lg bg-indigo-600 p-6 text-white">
+  <h2 class="text-2xl font-bold">Hotel dashboard</h2>
+  <p class="mt-2 text-indigo-50">Run room/table status, POS, staff, expenses, payments, and branch reporting.</p>
+</section>
+{% endif %}
+
+<section class="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+  <div class="stat-card"><p class="text-sm text-slate-500">{% if profile.business_type == 'school' %}Fees collected{% elif profile.business_type == 'club' %}Dues collected{% else %}Total sales{% endif %}</p><strong class="mt-2 block text-3xl text-slate-950" data-counter="{{ sales_total|floatformat:0 }}" data-prefix="R">R0</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">{% if profile.business_type == 'school' %}Net income{% elif profile.business_type == 'club' %}Club income{% else %}Gross profit{% endif %}</p><strong class="mt-2 block text-3xl text-slate-950" data-counter="{{ profit_total|floatformat:0 }}" data-prefix="R">R0</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">{% if 'inventory' in modules %}Stock on hand{% elif profile.business_type == 'school' %}Students{% elif profile.business_type == 'club' %}Members{% else %}Customers{% endif %}</p><strong class="mt-2 block text-3xl text-slate-950" data-counter="{% if 'inventory' in modules %}{{ stock_count }}{% else %}{{ customer_count }}{% endif %}">0</strong></div>
+  <div class="stat-card"><p class="text-sm text-slate-500">{% if profile.business_type == 'school' %}Outstanding fees{% elif profile.business_type == 'club' %}Outstanding dues{% else %}Customer debt{% endif %}</p><strong class="mt-2 block text-3xl text-slate-950" data-counter="{{ debt_total|floatformat:0 }}" data-prefix="R">R0</strong></div>
+</section>
+
+<section class="mb-6 grid gap-3 md:grid-cols-5">
+  {% if 'pos' in modules %}
+  <a class="btn-primary" href="{% url 'pos' %}"><i class="fa-solid fa-bolt"></i>Fast sale</a>
+  {% endif %}
+  {% if 'inventory' in modules or 'integrations' in modules %}
+  <a class="btn-primary bg-cyan-600 hover:bg-cyan-700" href="{% url 'import_excel' %}"><i class="fa-solid fa-file-import"></i>Import Excel</a>
+  {% endif %}
+  {% if 'payments' in modules %}
+  <a class="btn-primary bg-emerald-600 hover:bg-emerald-700" href="{% url 'payments' %}"><i class="fa-solid fa-mobile-screen"></i>Payments</a>
+  {% endif %}
+  {% if 'transfers' in modules %}
+  <a class="btn-primary bg-slate-800 hover:bg-slate-900" href="{% url 'transfers' %}"><i class="fa-solid fa-right-left"></i>Transfer</a>
+  {% endif %}
+  {% if 'integrations' in modules %}
+  <a class="btn-primary bg-indigo-600 hover:bg-indigo-700" href="{% url 'integrations' %}"><i class="fa-solid fa-gears"></i>Setup</a>
+  {% endif %}
+  {% if 'inventory' in modules %}<a class="btn-primary bg-amber-600 hover:bg-amber-700" href="{% url 'purchases' %}"><i class="fa-solid fa-truck-ramp-box"></i>Purchase</a>{% endif %}
+</section>
+
+{% if notifications %}
+<section class="mb-6 panel p-5">
+  <div class="mb-3 flex items-center justify-between"><h2 class="font-bold text-slate-950">Important alerts</h2><a class="text-sm font-semibold text-blue-700" href="{% url 'notifications' %}">View all</a></div>
+  <div class="grid gap-3 md:grid-cols-3">{% for item in notifications %}<div class="rounded-md border border-amber-200 bg-amber-50 px-3 py-3"><strong class="text-sm">{{ item.title }}</strong><p class="mt-1 text-xs text-slate-600">{{ item.message|truncatechars:90 }}</p></div>{% endfor %}</div>
+</section>
+{% endif %}
+
+<section class="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
+  <div class="panel overflow-hidden">
+    <div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold text-slate-950">Recent sales</h2></div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Receipt</th><th class="px-5 py-3">Customer</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Total</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          {% for sale in recent_sales %}
+          <tr class="transition hover:bg-blue-50/60"><td class="px-5 py-4"><a class="font-semibold text-blue-700" href="{{ sale.get_absolute_url }}">#{{ sale.id }}</a></td><td class="px-5 py-4">{{ sale.customer|default:'Walk-in' }}</td><td class="px-5 py-4">{{ sale.branch }}</td><td class="px-5 py-4 font-semibold">R{{ sale.total|floatformat:2 }}</td></tr>
+          {% empty %}<tr><td class="px-5 py-4" colspan="4">No sales yet.</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% if 'inventory' in modules %}
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Low stock alerts</h2>
+    <div class="space-y-3">
+      {% for product in low_stock %}
+      <div class="flex items-center justify-between rounded-md bg-amber-50 px-3 py-3">
+        <span><strong class="block text-sm">{{ product.name }}</strong><small class="text-slate-500">{{ product.branch }}</small></span>
+        <span class="badge bg-amber-100 text-amber-800">{{ product.stock }} left</span>
+      </div>
+      {% empty %}<p class="text-sm text-slate-500">All products are above reorder level.</p>{% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">{% if profile.business_type == 'school' %}School actions{% elif profile.business_type == 'club' %}Club actions{% else %}Workspace actions{% endif %}</h2>
+    <div class="space-y-3">
+      {% if 'customers' in modules %}<a class="flex items-center justify-between rounded-md bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800" href="{% url 'crud_list' 'customers' %}">{% if profile.business_type == 'school' %}Manage students{% elif profile.business_type == 'club' %}Manage members{% else %}Manage customers{% endif %}<i class="fa-solid fa-arrow-right"></i></a>{% endif %}
+      {% if 'employees' in modules %}<a class="flex items-center justify-between rounded-md bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800" href="{% url 'crud_list' 'employees' %}">Manage staff<i class="fa-solid fa-arrow-right"></i></a>{% endif %}
+      {% if 'payments' in modules %}<a class="flex items-center justify-between rounded-md bg-emerald-50 px-3 py-3 text-sm font-semibold text-emerald-800" href="{% url 'crud_list' 'payments' %}">Record payments<i class="fa-solid fa-arrow-right"></i></a>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+<section class="mt-6 grid gap-6 xl:grid-cols-2">
+  {% if 'hospitality' in modules %}
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Branch performance</h2>
+    <div class="space-y-4">
+      {% for branch in branch_summary %}
+      <div>
+        <div class="mb-2 flex justify-between text-sm"><span class="font-semibold">{{ branch.name }}</span><span>{{ branch.sale_count }} sales</span></div>
+        <div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-blue-600" style="width: {% widthratio branch.sale_count 10 100 %}%"></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Hotel & restaurant status</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {% for unit in hospitality %}
+      <div class="rounded-md border border-slate-200 p-3"><div class="flex justify-between"><strong>{{ unit.name }}</strong><span class="badge bg-blue-50 text-blue-700">{{ unit.status }}</span></div><p class="mt-2 text-sm text-slate-500">{{ unit.get_unit_type_display }}{% if unit.current_guest %} - {{ unit.current_guest }}{% endif %}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+<section class="mt-6 grid gap-6 xl:grid-cols-2">
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Recent payments</h2>
+    <div class="space-y-3">
+      {% for payment in payments %}
+      <div class="flex items-center justify-between rounded-md bg-slate-50 px-3 py-3"><span>{{ payment.get_method_display }}<small class="block text-slate-500">{{ payment.branch }}</small></span><strong>R{{ payment.amount }}</strong></div>
+      {% empty %}<p class="text-sm text-slate-500">No payments recorded yet.</p>{% endfor %}
+    </div>
+  </div>
+  <div class="panel p-5">
+    <h2 class="mb-4 font-bold text-slate-950">Activity log</h2>
+    <div class="space-y-3">
+      {% for log in activity_logs %}
+      <div class="rounded-md border border-slate-200 px-3 py-3"><strong class="text-sm">{{ log.action }}</strong><p class="text-xs text-slate-500">{{ log.actor }} - {{ log.created_at }}</p></div>
+      {% empty %}<p class="text-sm text-slate-500">No activity yet.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

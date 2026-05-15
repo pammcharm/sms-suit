@@ -1,0 +1,760 @@
+{
+  "created_at": "2026-05-15T11:31:35.030958+00:00",
+  "tables": {
+    "BusinessProfile": [
+      {
+        "id": 1,
+        "name": "Render Demo Shop",
+        "business_type": "mini_market",
+        "momo_number": "+250780000000",
+        "airtel_money_number": "+250730000000",
+        "whatsapp_number": "+250781111111",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "render@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 2,
+        "name": "Integration Shop",
+        "business_type": "mini_market",
+        "momo_number": "+250780000001",
+        "airtel_money_number": "+250730000001",
+        "whatsapp_number": "+250780000002",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "integration@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 3,
+        "name": "School Workspace",
+        "business_type": "school",
+        "momo_number": "",
+        "airtel_money_number": "",
+        "whatsapp_number": "",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "customers",
+          "employees",
+          "payments",
+          "expenses",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "school@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 4,
+        "name": "Club Workspace",
+        "business_type": "club",
+        "momo_number": "",
+        "airtel_money_number": "",
+        "whatsapp_number": "",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "customers",
+          "employees",
+          "payments",
+          "expenses",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "club@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 5,
+        "name": "Hotel Workspace",
+        "business_type": "hotel",
+        "momo_number": "",
+        "airtel_money_number": "",
+        "whatsapp_number": "",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "employees",
+          "hospitality",
+          "expenses",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "hotel@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 6,
+        "name": "Other Workspace",
+        "business_type": "other",
+        "momo_number": "",
+        "airtel_money_number": "",
+        "whatsapp_number": "",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "employees",
+          "expenses",
+          "hospitality",
+          "suppliers",
+          "transfers",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "other@example.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 7,
+        "name": "pamm charm's Business",
+        "business_type": "shop",
+        "momo_number": "0795611343",
+        "airtel_money_number": "072223343",
+        "whatsapp_number": "0795611343",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "ngirimanamaurice8@gmail.com",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": null,
+        "trial_ends_at": null,
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      },
+      {
+        "id": 8,
+        "name": "Kigali Smart Shop",
+        "business_type": "shop",
+        "momo_number": "0780000000",
+        "airtel_money_number": "0730000000",
+        "whatsapp_number": "0780000000",
+        "google_sheet_url": "",
+        "microsoft_excel_url": "",
+        "offline_mode_enabled": true,
+        "selected_modules": [
+          "pos",
+          "inventory",
+          "customers",
+          "payments",
+          "employees",
+          "expenses",
+          "suppliers",
+          "reports",
+          "integrations"
+        ],
+        "owner_email": "demo@sms.local",
+        "setup_completed": true,
+        "plan": "free_trial",
+        "trial_started_at": "2026-05-15T11:22:24.893Z",
+        "trial_ends_at": "2026-11-11T11:22:24.893Z",
+        "subscription_status": "trial",
+        "max_branches": 1,
+        "max_employees": 5,
+        "max_products": 200
+      }
+    ],
+    "Branch": [
+      {
+        "id": 1,
+        "profile": 1,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "+250780000000",
+        "is_active": true
+      },
+      {
+        "id": 2,
+        "profile": 2,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "+250780000001",
+        "is_active": true
+      },
+      {
+        "id": 3,
+        "profile": 3,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "",
+        "is_active": true
+      },
+      {
+        "id": 4,
+        "profile": 4,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "",
+        "is_active": true
+      },
+      {
+        "id": 5,
+        "profile": 5,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "",
+        "is_active": true
+      },
+      {
+        "id": 6,
+        "profile": 6,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "",
+        "is_active": true
+      },
+      {
+        "id": 7,
+        "profile": 7,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "0795611343",
+        "is_active": true
+      },
+      {
+        "id": 8,
+        "profile": 8,
+        "name": "Main Branch",
+        "location": "Kigali",
+        "phone": "0780000000",
+        "is_active": true
+      }
+    ],
+    "Category": [
+      {
+        "id": 12,
+        "profile": 8,
+        "name": "Clothes"
+      },
+      {
+        "id": 10,
+        "profile": 8,
+        "name": "Drinks"
+      },
+      {
+        "id": 3,
+        "profile": 2,
+        "name": "Excel Cat"
+      },
+      {
+        "id": 11,
+        "profile": 8,
+        "name": "Food"
+      },
+      {
+        "id": 1,
+        "profile": 1,
+        "name": "General"
+      },
+      {
+        "id": 2,
+        "profile": 2,
+        "name": "General"
+      },
+      {
+        "id": 4,
+        "profile": 3,
+        "name": "General"
+      },
+      {
+        "id": 5,
+        "profile": 4,
+        "name": "General"
+      },
+      {
+        "id": 6,
+        "profile": 5,
+        "name": "General"
+      },
+      {
+        "id": 7,
+        "profile": 6,
+        "name": "General"
+      },
+      {
+        "id": 8,
+        "profile": 7,
+        "name": "General"
+      },
+      {
+        "id": 9,
+        "profile": 8,
+        "name": "General"
+      },
+      {
+        "id": 13,
+        "profile": 8,
+        "name": "Pharmacy"
+      },
+      {
+        "id": 14,
+        "profile": 8,
+        "name": "Services"
+      }
+    ],
+    "Supplier": [
+      {
+        "id": 1,
+        "profile": 2,
+        "name": "Excel Supplier",
+        "phone": "",
+        "email": "",
+        "location": ""
+      },
+      {
+        "id": 3,
+        "profile": 8,
+        "name": "Kigali Wholesale Supplier",
+        "phone": "0781111111",
+        "email": "",
+        "location": "Nyabugogo"
+      },
+      {
+        "id": 2,
+        "profile": 7,
+        "name": "pepsi",
+        "phone": "0795611343",
+        "email": "pepsi@gmail.com",
+        "location": "makuza"
+      }
+    ],
+    "Product": [
+      {
+        "id": 5,
+        "name": "Black T-Shirt Medium",
+        "item_type": "product",
+        "sku": "TSHIRT-BLK-M",
+        "category": 12,
+        "branch": 8,
+        "supplier": 3,
+        "barcode": "",
+        "image_url": "",
+        "price": "15000.00",
+        "cost": "9000.00",
+        "stock": 25,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 7,
+        "name": "Delivery Service",
+        "item_type": "service",
+        "sku": "SERVICE-DELIVERY",
+        "category": 14,
+        "branch": 8,
+        "supplier": null,
+        "barcode": "",
+        "image_url": "",
+        "price": "2000.00",
+        "cost": "0.00",
+        "stock": 0,
+        "reorder_level": 0,
+        "track_inventory": false,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 1,
+        "name": "Excel Test Product",
+        "item_type": "product",
+        "sku": "IMP-2-0001",
+        "category": 3,
+        "branch": 2,
+        "supplier": 1,
+        "barcode": "",
+        "image_url": "",
+        "price": "150.00",
+        "cost": "100.00",
+        "stock": 9,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 3,
+        "name": "Mineral Water 500ml",
+        "item_type": "product",
+        "sku": "MIN-WATER-500",
+        "category": 10,
+        "branch": 8,
+        "supplier": 3,
+        "barcode": "",
+        "image_url": "",
+        "price": "500.00",
+        "cost": "300.00",
+        "stock": 120,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 6,
+        "name": "Paracetamol 500mg",
+        "item_type": "product",
+        "sku": "PARA-500",
+        "category": 13,
+        "branch": 8,
+        "supplier": 3,
+        "barcode": "",
+        "image_url": "",
+        "price": "1000.00",
+        "cost": "600.00",
+        "stock": 80,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 4,
+        "name": "Rice 1kg",
+        "item_type": "product",
+        "sku": "RICE-1KG",
+        "category": 11,
+        "branch": 8,
+        "supplier": 3,
+        "barcode": "",
+        "image_url": "",
+        "price": "1800.00",
+        "cost": "1400.00",
+        "stock": 60,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "",
+        "expiry_date": null,
+        "is_active": true
+      },
+      {
+        "id": 2,
+        "name": "pepsi",
+        "item_type": "product",
+        "sku": "pep-s1",
+        "category": 8,
+        "branch": 7,
+        "supplier": 2,
+        "barcode": "12233445",
+        "image_url": "https://www.google.com/imgres?q=pepsi&imgurl=https%3A%2F%2Fpics.walgreens.com%2Fprodimg%2F417521%2F450.jpg&imgrefurl=https%3A%2F%2Fwww.walgreens.com%2Fstore%2Fc%2Fpepsi-soda-2-liter-bottle%2FID%3Dprod",
+        "price": "2000.00",
+        "cost": "1600.00",
+        "stock": 18,
+        "reorder_level": 10,
+        "track_inventory": true,
+        "batch_number": "psku2330",
+        "expiry_date": "2026-05-15",
+        "is_active": true
+      }
+    ],
+    "Customer": [
+      {
+        "id": 3,
+        "profile": 8,
+        "name": "Jean Customer",
+        "phone": "0783333333",
+        "email": "jean@example.com",
+        "debt_balance": "0.00",
+        "credit_balance": "0.00",
+        "loyalty_points": 0
+      },
+      {
+        "id": 2,
+        "profile": 8,
+        "name": "Walk-in Customer",
+        "phone": "",
+        "email": "",
+        "debt_balance": "0.00",
+        "credit_balance": "0.00",
+        "loyalty_points": 0
+      },
+      {
+        "id": 1,
+        "profile": 7,
+        "name": "ngirimana maurice",
+        "phone": "0795611343",
+        "email": "ngirimanamaurice8@gmail.com",
+        "debt_balance": "0.00",
+        "credit_balance": "0.00",
+        "loyalty_points": 210
+      }
+    ],
+    "Employee": [
+      {
+        "id": 1,
+        "branch": 8,
+        "name": "Demo Cashier",
+        "role": "cashier",
+        "phone": "0782222222",
+        "salary": "120000.00",
+        "is_active": true
+      }
+    ],
+    "Sale": [
+      {
+        "id": 1,
+        "branch": 7,
+        "customer": 1,
+        "cashier": null,
+        "payment_method": "cash",
+        "payment_status": "paid",
+        "reference": "",
+        "offline_reference": "",
+        "discount_amount": "0.00",
+        "amount_paid": "0.00",
+        "balance_due": "0.00"
+      }
+    ],
+    "SaleItem": [
+      {
+        "id": 1,
+        "sale": 1,
+        "product": 2,
+        "quantity": 1,
+        "unit_price": "2000.00",
+        "unit_cost": "1600.00"
+      }
+    ],
+    "Payment": [
+      {
+        "id": 1,
+        "branch": 7,
+        "sale": 1,
+        "method": "cash",
+        "amount": "2000.00",
+        "status": "matched",
+        "transaction_reference": ""
+      }
+    ],
+    "Expense": [],
+    "Purchase": [],
+    "PurchaseItem": [],
+    "StockMovement": [
+      {
+        "id": 2,
+        "product": 2,
+        "branch": 7,
+        "movement_type": "stock_out",
+        "quantity": -1,
+        "reference": "",
+        "notes": "",
+        "created_by": 1
+      },
+      {
+        "id": 1,
+        "product": 2,
+        "branch": 7,
+        "movement_type": "sale",
+        "quantity": -1,
+        "reference": "Sale #1",
+        "notes": "",
+        "created_by": 1
+      }
+    ],
+    "StockTransfer": [],
+    "ActivityLog": [
+      {
+        "id": 16,
+        "profile": 7,
+        "branch": null,
+        "actor": "ngirimanamaurice8@gmail.com",
+        "action": "Updated team access for pammcharm03@gmail.com"
+      },
+      {
+        "id": 15,
+        "profile": 7,
+        "branch": null,
+        "actor": "ngirimanamaurice8@gmail.com",
+        "action": "Updated team access for pammcharm@gmail.com"
+      },
+      {
+        "id": 14,
+        "profile": 7,
+        "branch": 7,
+        "actor": "ngirimanamaurice8@gmail.com",
+        "action": "Recorded stock out for pepsi"
+      },
+      {
+        "id": 13,
+        "profile": 7,
+        "branch": 7,
+        "actor": "Cashier",
+        "action": "Recorded sale #1"
+      },
+      {
+        "id": 12,
+        "profile": 7,
+        "branch": null,
+        "actor": "ngirimanamaurice8@gmail.com",
+        "action": "Updated team access for pammcharm@gmail.com"
+      },
+      {
+        "id": 11,
+        "profile": 7,
+        "branch": null,
+        "actor": "System",
+        "action": "Created Products & Services: pepsi (pep-s1)"
+      },
+      {
+        "id": 10,
+        "profile": 7,
+        "branch": null,
+        "actor": "System",
+        "action": "Created Customers: ngirimana maurice"
+      },
+      {
+        "id": 9,
+        "profile": 7,
+        "branch": null,
+        "actor": "System",
+        "action": "Created Suppliers: pepsi"
+      },
+      {
+        "id": 8,
+        "profile": 7,
+        "branch": null,
+        "actor": "System",
+        "action": "Connected Airtel Money"
+      },
+      {
+        "id": 7,
+        "profile": 7,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 6,
+        "profile": 6,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 5,
+        "profile": 5,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 4,
+        "profile": 4,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 3,
+        "profile": 3,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 2,
+        "profile": 2,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      },
+      {
+        "id": 1,
+        "profile": 1,
+        "branch": null,
+        "actor": "System",
+        "action": "Completed first-time business setup"
+      }
+    ]
+  }
+}

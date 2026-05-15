@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Backups - SMS Suite{% endblock %}
+{% block page_title %}Backup Center{% endblock %}
+{% block content %}
+<div class="grid gap-6 xl:grid-cols-[1fr_1fr]">
+  <div class="panel p-5">
+    <h2 class="text-lg font-bold">Production backup rule</h2>
+    <p class="mt-2 text-sm text-slate-600">Before real customers use the app, run automatic PostgreSQL backups from your host and test restore every week.</p>
+    <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-950 p-4 text-xs text-white">python manage.py backup_business_data</pre>
+    <p class="mt-3 text-sm text-slate-500">This command exports business data to a JSON file inside the backups folder for quick emergency recovery.</p>
+  </div>
+  <div class="panel overflow-hidden">
+    <div class="border-b border-slate-200 px-5 py-4"><h2 class="font-bold">Backup logs</h2></div>
+    <div class="divide-y divide-slate-100">
+      {% for log in logs %}<div class="px-5 py-4"><strong>{{ log.filename }}</strong><p class="text-xs text-slate-500">{{ log.status }} · {{ log.created_at }}</p><p class="text-sm text-slate-600">{{ log.notes }}</p></div>{% empty %}<p class="px-5 py-4 text-sm text-slate-500">No backup logs yet.</p>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

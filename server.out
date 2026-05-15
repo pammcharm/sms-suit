@@ -1,0 +1,46 @@
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 15, 2026 - 15:04:02
+Django version 6.0.5, using settings 'sms_project.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Subject: Verify your SMS Suite account
+From: SMS Suite <no-reply@sms-suite.local>
+To: pammcahrm03@gmail.com
+Date: Fri, 15 May 2026 13:14:17 +0000
+Message-ID: <177885085768.17564.10609472023034580013@Pamm>
+
+Your SMS Suite verification code is 006443. It expires in 15 minutes.
+
+-------------------------------------------------------------------------------
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Subject: Verify your SMS Suite account
+From: SMS Suite <no-reply@sms-suite.local>
+To: pammcahrm03@gmail.com
+Date: Fri, 15 May 2026 13:15:55 +0000
+Message-ID: <177885095534.17564.12296204306896301515@Pamm>
+
+Your SMS Suite verification code is 749334. It expires in 15 minutes.
+
+-------------------------------------------------------------------------------
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Subject: Verify your SMS Suite account
+From: SMS Suite <no-reply@sms-suite.local>
+To: pammcahrm03@gmail.com
+Date: Fri, 15 May 2026 13:17:04 +0000
+Message-ID: <177885102414.17564.14765705427161250396@Pamm>
+
+Your SMS Suite verification code is 585667. It expires in 15 minutes.
+
+-------------------------------------------------------------------------------

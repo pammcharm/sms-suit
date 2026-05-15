@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Expenses - SMS Suite{% endblock %}
+{% block page_title %}Expense Tracking{% endblock %}
+{% block content %}
+<section class="grid gap-6 xl:grid-cols-[380px_1fr]">
+  <form method="post" class="panel p-5">{% csrf_token %}<h2 class="mb-4 font-bold">Record expense</h2><div class="space-y-4">{% for field in form %}<label class="block text-sm font-medium text-slate-700">{{ field.label }}{{ field }}</label>{% endfor %}</div><button class="btn-primary mt-5 w-full"><i class="fa-solid fa-plus"></i>Add expense</button></form>
+  <div class="panel overflow-hidden"><table class="w-full text-left text-sm"><thead class="bg-slate-50 text-xs uppercase text-slate-500"><tr><th class="px-5 py-3">Expense</th><th class="px-5 py-3">Branch</th><th class="px-5 py-3">Category</th><th class="px-5 py-3">Amount</th></tr></thead><tbody class="divide-y divide-slate-100">{% for expense in expenses %}<tr><td class="px-5 py-4 font-semibold">{{ expense.title }}</td><td class="px-5 py-4">{{ expense.branch }}</td><td class="px-5 py-4">{{ expense.category }}</td><td class="px-5 py-4">R{{ expense.amount }}</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}
